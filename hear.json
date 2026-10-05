@@ -1,0 +1,19 @@
+{
+  "name": "hear",
+  "description": "Record microphone audio and return the spoken words as text. Use when the user wants to talk instead of type. Blocks until the recording and transcription finish.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "seconds": {
+        "type": "integer",
+        "description": "Recording duration in seconds",
+        "default": 5
+      },
+      "language": {
+        "type": "string",
+        "description": "Language code for transcription",
+        "default": "en"
+      }
+    }
+  }
+}
