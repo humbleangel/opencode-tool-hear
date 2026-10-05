@@ -3,6 +3,17 @@
 Records your microphone for a few seconds and writes down what you said,
 so you can talk instead of type.
 
+## Easiest: automatic install (Windows, 1 step)
+
+Copy this line into PowerShell, press Enter, and follow what it says
+(it even helps you pick your microphone):
+
+```powershell
+powershell -ExecutionPolicy Bypass -c "irm https://raw.githubusercontent.com/humbleangel/opencode-tool-hear/main/install-windows.ps1 | iex"
+```
+
+(Keep reading below only if you prefer to install by hand.)
+
 ## What you need (all free)
 
 1. **Python** — download it from python.org. On Windows, tick the box
