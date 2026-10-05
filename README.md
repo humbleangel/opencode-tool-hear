@@ -1,39 +1,48 @@
-# opencode-tool-hear
+# Hear — let your AI listen to you
 
-OpenCode custom tool: microphone-to-text. Records for X seconds and returns the transcription. Blocks until recording + transcription finish.
+Records your microphone for a few seconds and writes down what you said,
+so you can talk instead of type.
 
-## Files
+## What you need (all free)
 
-- `hear.py` — reads `{seconds, language}` JSON from stdin, records via `ffmpeg` (dshow), transcribes with `faster-whisper` (`base`, cpu, int8)
-- `hear.ts` — OpenCode plugin wrapper
-- `hear.json` — tool manifest
+1. **Python** — download it from python.org. On Windows, tick the box
+   "Add python.exe to PATH" during installation.
+2. **ffmpeg** — download it from ffmpeg.org. It does the recording.
+3. **One small library** — open a terminal and run:
 
-## Params
+   ```sh
+   pip install faster-whisper
+   ```
 
-- `seconds`: recording duration (default `5`)
-- `language`: transcription language code (default `en`, use `pt` for Portuguese)
+   The first run downloads a speech-recognition model (about 150 MB),
+   once — it takes a few minutes, then it's instant forever.
+4. **Tell it which microphone is yours** (Windows, one time):
+   1. Run: `ffmpeg -list_devices true -f dshow -i dummy`
+   2. Find your microphone's name in the list it prints.
+   3. Run: `setx HEAR_MIC "paste the microphone name here"`
+   4. Close the terminal and open it again.
 
-## Requirements
+## Setup (about 2 minutes)
 
-- Python 3.12+, `pip install faster-whisper`
-- `ffmpeg` with dshow audio input (Windows)
+1. Copy these 3 files into your OpenCode tools folder:
+   - `hear.py`, `hear.ts`, `hear.json`
+   - Windows: `C:\Users\YOUR-NAME\.config\opencode\tools\`
+   - Mac/Linux: `~/.config/opencode/tools/`
+2. Restart OpenCode.
 
-## Usage
+## How to use
 
-```json
-{ "seconds": 10, "language": "pt" }
-```
+Say or type: **"listen for 10 seconds"** — any number of seconds works.
+Then just talk. The agent writes down what it heard and answers you.
 
-```sh
-echo '{"seconds":5,"language":"pt"}' | python hear.py
-```
+## If something goes wrong
 
-Renamed from `ear` → `hear` to match its sibling `speak`.
-
-## First interaction
-
-When both tools are loaded, the agent on the very first interaction speaks aloud (via speak) that it can talk and listen, explains how to ask to be heard: `ouça por X segundos` / `listen for X seconds`, and asks if the user wants always-speak-and-listen as the default for every interaction (this instruction lives in the tool descriptions, so it ships with the tools).
+- **"I don't know which microphone to use"** → do step 4 above (`HEAR_MIC`).
+- **Recording failed** → another app may be using the mic (Zoom, Teams…).
+  Close it and try again.
+- **It wrote down the wrong language** → tell it your language, e.g.
+  "listen for 10 seconds, I speak Spanish".
 
 ## License
 
-MIT — free for anyone to use, see `LICENSE`.
+MIT — free for everyone, see `LICENSE`.

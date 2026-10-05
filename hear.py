@@ -5,9 +5,12 @@ Microphone-to-text tool.
 Reads JSON input from stdin:
     {"seconds": 5, "language": "en"}
 
-Records from the default microphone via ffmpeg, transcribes with
+Records from the microphone via ffmpeg, transcribes with
 faster-whisper, and prints JSON to stdout:
     {"success": true, "text": "..."}
+
+Set HEAR_MIC to your input device name. List devices with:
+    ffmpeg -list_devices true -f dshow -i dummy
 """
 
 import json
@@ -16,7 +19,7 @@ import subprocess
 import sys
 import tempfile
 
-MIC = "Microphone (Realtek High Definition Audio)"
+MIC = os.environ.get("HEAR_MIC", "").strip()
 
 
 def main() -> int:
@@ -29,7 +32,11 @@ def main() -> int:
     seconds = int(data.get("seconds", 5))
     language = data.get("language", "en")
 
-    wav = os.path.join(tempfile.gettempdir(), "ear_in.wav")
+    if not MIC:
+        print(json.dumps({"success": False, "message": "I don't know which microphone to use. Set the HEAR_MIC environment variable to your microphone name. List devices with: ffmpeg -list_devices true -f dshow -i dummy"}))
+        return 1
+
+    wav = os.path.join(tempfile.gettempdir(), "hear_in.wav")
     try:
         rec = subprocess.run(
             [

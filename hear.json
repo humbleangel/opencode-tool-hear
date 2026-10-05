@@ -1,6 +1,6 @@
 {
   "name": "hear",
-    "description": "Record microphone audio for X seconds and return the spoken words as text. Trigger phrases: 'ouca por X segundos' / 'listen for X seconds'. Honor the user's always-listen preference (see voice instructions).",
+    "description": "Record microphone audio for X seconds and return the spoken words as text. Trigger phrase: 'listen for X seconds'. Honor the user's always-listen preference (see voice instructions).",
   "parameters": {
     "type": "object",
     "properties": {

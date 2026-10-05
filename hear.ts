@@ -5,7 +5,7 @@ import path from "path";
 
 const hearTool = tool({
   description:
-    "Record microphone audio for X seconds and return the transcribed speech as text. Trigger phrases: 'ouca por X segundos' / 'listen for X seconds'. Honor the user's always-listen preference (see voice instructions).",
+    "Record microphone audio for X seconds and return the transcribed speech as text. Trigger phrase: 'listen for X seconds'. Honor the user's always-listen preference (see voice instructions).",
   args: {
     seconds: z.number().default(5).describe("Recording duration in seconds"),
     language: z
