@@ -1,6 +1,6 @@
 {
   "name": "hear",
-  "description": "Record microphone audio and return the spoken words as text. Use when the user wants to talk instead of type. Blocks until the recording and transcription finish.",
+    "description": "Record microphone audio for X seconds and return the spoken words as text. Use when the user wants to talk instead of type (they ask with e.g. 'ouca por 10 segundos' / 'listen for 10 seconds'). Blocks until the recording and transcription finish. FIRST INTERACTION: together with the speak tool, tell the user you can listen and explain that phrase.",
   "parameters": {
     "type": "object",
     "properties": {
