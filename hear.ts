@@ -5,7 +5,7 @@ import path from "path";
 
 const hearTool = tool({
   description:
-    "Record microphone audio for X seconds and return the transcribed speech as text. Use when the user asks to be heard (e.g. 'ouca por 10 segundos' / 'listen for 10 seconds'). Blocks until recording and transcription finish. FIRST INTERACTION: tell the user you can listen and explain that phrase.",
+    "Record microphone audio for X seconds and return the transcribed speech as text. Use when the user asks to be heard (e.g. 'ouca por 10 segundos' / 'listen for 10 seconds'). Blocks until recording and transcription finish. FIRST INTERACTION: the speak tool asks aloud if the user wants always-speak-and-listen by default; honor that preference afterwards.",
   args: {
     seconds: z.number().default(5).describe("Recording duration in seconds"),
     language: z
